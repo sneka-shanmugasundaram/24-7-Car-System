@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family:arial;
+        }
+
+
+        .sidenav {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #22d3eb;
+            overflow-x: hidden;
+            padding-top: 0px;
+        }
+
+
+        .sidenav a,
+        .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 23px;
+            color: #40b39b;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+
+        .sidenav a:hover,
+        .dropdown-btn:hover {
+            color: #f1f1f1;
+        }
+
+
+        .main {
+            margin-left: 300px;
+
+            font-size: 20px;
+
+            padding: 0px 10px;
+        }
+
+
+        .active {
+            background-color: white;
+            color: black;
+        }
+
+
+        .dropdown-container {
+            display: none;
+            background-color: #232362;
+            padding-left: 8px;
+        }
+
+
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-image:url('bgf.avif');background-repeat: no-repeat; background-size:cover;">
+    <header>
+
+
+
+        <div class="sidenav">
+            {% load static %}
+            <img src="{% static "/images/logo.jpg" %}" alt="" height="70px" width="250px"><br><br>
+            <a href="{% url "emp_profile" %}" style="color:white;padding-left:25px;">  <i class="fas fa-user text-light" style="font-size: 2rem;"></i> Profile</a><br>
+            <a href="{% url "change_password" %}" style="color:white;">Change Password</a><br>
+            <a href="{% url "used_car" %}" style="color:white;">Used Car</a><br>
+            <a href="{% url "approved" %}" style="color:white;">Approved Cars</a><br>
+            <a href="{% url "selling_car" %}" style="color:white;">Selling Details</a><br>
+            <a href="{% url "selling_form" %}" style="color:white;"><button class="btn btn-warning btn-lg">SELL CAR</button></a>
+            
+            <button class="btn bg-danger"  style="margin-top:130px;margin-left:30px;margin-bottum:20px;"><a href="{% url "logout" %}" style="color: white;">Logout</a></button>
+
+        </div>
+
+        <div class="main">
+            {% block content %}
+    
+            {% endblock content %}
+        </div>
+
+        <script>
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
+
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function() {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+        </script>
+
+</body>
+
+</html>
